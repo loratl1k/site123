@@ -8,7 +8,8 @@ from datetime import date
 
 class Genre(models.Model):
     name = models.CharField(
-        max_length=200, help_text='Введите жанр книги', verbose_name='Жанр книги')
+        max_length=200, help_text='Введите жанр книги',
+        verbose_name='Жанр книги')
 
     def __str__(self):
         return self.name
@@ -37,15 +38,18 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255, verbose_name="Название книги")
     genre = models.ForeignKey(
-        'Genre', on_delete=models.CASCADE, verbose_name='Жанр книги', null=True)
+        'Genre', on_delete=models.CASCADE, verbose_name='Жанр книги',
+        null=True)
     language = models.ForeignKey(
-        'Language', on_delete=models.CASCADE, verbose_name='Язык книги', null=True)
+        'Language', on_delete=models.CASCADE, verbose_name='Язык книги',
+        null=True)
     author = models.ManyToManyField(
         'Author', verbose_name='Автор книги')
     summary = models.TextField(
         max_length=1000, verbose_name='Аннотация книги')
     isbn = models.CharField(
-        max_length=13, verbose_name="ISBN", help_text='Должно содержать 13 символов')
+        max_length=13, verbose_name="ISBN",
+        help_text='Должно содержать 13 символов')
 
     def __str__(self):
         return self.title
@@ -72,11 +76,13 @@ class BookInstance(models.Model):
     inv_nom = models.CharField(max_length=20, verbose_name="Инвентарный номер")
     imprint = models.CharField(max_length=200, verbose_name="Издательство")
     status = models.ForeignKey(
-        'Status', on_delete=models.CASCADE, null=True, verbose_name='Статус экземпляра книги')
+        'Status', on_delete=models.CASCADE, null=True,
+        verbose_name='Статус экземпляра книги')
     due_back = models.DateField(
         null=True, blank=True, verbose_name='Срок сдачи')
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,
-                                 blank=True, verbose_name="Заказчик", help_text="Выберите заказчика книги")
+                                 blank=True, verbose_name="Заказчик",
+                                 help_text="Выберите заказчика книги")
 
     def __str__(self):
         return f"{self.inv_nom} {self.book} {self.status}"

@@ -20,7 +20,8 @@ admin.site.register(Author, AuthorAdmin)
 
 
 class BooksInstanceInline(admin.TabularInline):
-  model = BookInstance
+    model = BookInstance
+
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -35,7 +36,6 @@ class BookInstanceAdmin(admin.ModelAdmin):
     list_filter = ('status', 'due_back')
     fieldsets = (
         ('Экземпляр книги', {'fields': ('book', 'imprint', 'inv_nom')}),
-        ('Статус и окончание его действия', {'fields': ('status', 'due_back', 'borrower')})
+        ('Статус и окончание его действия', {
+         'fields': ('status', 'due_back', 'borrower')})
     )
-
-
