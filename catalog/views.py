@@ -45,5 +45,5 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return BookInstance.objects \
             .filter(borrower=self.request.user) \
-            .filter(status__exact='2') \
+            .filter(status__exact='1') \
             .order_by('due_back')

@@ -14,6 +14,11 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering =('name',)
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
+
 
 class Language(models.Model):
     name = models.CharField(
@@ -21,6 +26,11 @@ class Language(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering =('name',)
+        verbose_name = 'Язык'
+        verbose_name_plural = 'Языки'
 
 
 class Author(models.Model):
@@ -33,6 +43,11 @@ class Author(models.Model):
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
+
+    class Meta:
+        ordering =('last_name', 'first_name')
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
 
 
 class Book(models.Model):
@@ -62,6 +77,11 @@ class Book(models.Model):
         return ', '.join([author.last_name for author in self.author.all()])
     display_author.short_description = 'Авторы'
 
+    class Meta:
+        ordering =('title',)
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
+
 
 class Status(models.Model):
     name = models.CharField(
@@ -69,6 +89,11 @@ class Status(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering =('name',)
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'
 
 
 class BookInstance(models.Model):
@@ -89,6 +114,11 @@ class BookInstance(models.Model):
 
     def get_status_display(self):
         return self.status
+
+    class Meta:
+        ordering =('inv_nom',)
+        verbose_name = 'Экземпляр книги'
+        verbose_name_plural = 'Экземпляры книг'
 
     @property
     def is_overdue(self):
